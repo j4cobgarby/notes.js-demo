@@ -1,0 +1,120 @@
+// out: testpage.css
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto';
+}
+
+html {
+  padding-bottom: 200px;
+}
+
+@main: #ec5773;
+
+.header {
+  user-select: none;
+  background-color: @main;
+  color: white;
+  height: 370px;
+  text-align: center;
+  box-sizing: border-box;
+  font-size: 70px;
+  cursor: default;
+
+  code {
+    font-size: 30px;
+    font-weight: bold;
+    font-family: 'Inconsolata';
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+    font-family: 'Pacifico';
+  }
+}
+
+.subheader {
+  padding-top: 15px;
+  height: 80px;
+  background-color: transparent;
+  text-align: center;
+  font-size: 25px;
+  line-height: 40px;
+  color: @main;
+
+  a {
+    font-size: 17px;
+    text-decoration: none;
+    color: @main;
+    font-weight: 500;
+    margin: 0 20px;
+    transition-duration: 0.3s;
+    border-bottom: 2px solid white;
+    padding-bottom: 3px;
+
+    &:hover {
+      border-color: @main;
+    }
+  }
+}
+
+.main {
+  margin: auto;
+  width: 80%;
+  max-width: 1000px;
+
+  h2, h3, h4, h5, h6 {
+    font-weight: 400;
+    color: #3e3e3e;
+  }
+
+  p {
+    padding-left: 10px;
+    font-size: 18px;
+    color: #414141;
+    text-align: justify;
+
+    a {
+      color: #1b90f1;
+    }
+  }
+
+  notesjs {
+    font-family: 'Pacifico';
+  }
+
+  button {
+    font-family: 'Roboto';
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    outline: none;
+    background-color: white;
+    color: @main;
+    font-size: 15px;
+    font-weight: 500;
+    border: 1px solid @main;
+    border-radius: 4px;
+    transition-duration: 0.15s;
+    margin-left: 30px;
+
+    &:hover {
+      background-color: @main;
+      color: white;
+    }
+  }
+
+  pre {
+    padding: 0;
+    margin: 0;
+  }
+
+  code {
+    font-family: 'Inconsolata';
+    color: #3b3b3b;
+    font-weight: 700;
+    font-size: 15px;
+  }
+}

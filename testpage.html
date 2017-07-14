@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>notes.js demo</title>
+    <link rel="stylesheet" href="testpage.css">
+    <link rel="stylesheet" href="src/inln-notify.min.css">
+    <script src="src/inln-notify.js" charset="utf-8"></script>
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata:400,700|Pacifico|Roboto:400,500" rel="stylesheet">
+  </head>
+  <body>
+    <div class="header">
+      <h1>notes.js</h1>
+      <code>
+        Notify(this, 'succ', 'Hello, world!')
+      </code>
+    </div>
+    <div class="subheader">
+      The <b>~1.5KB small</b> Javascript notifications library
+      <br>
+      <a href="#">Download here</a>
+      <a href="#">Github repo here</a>
+    </div>
+    <div class="main">
+      <h1>Introduction to <notesjs>notes.js</notesjs></h1>
+      <p>
+        Essentially what this library does is provide an easy way for you to
+        display notifications next to a chosen element. For example, one might
+        use this to tell the user of a website some information after clicking
+        a button. So, let's see what it looks like in a very basic example!
+      </p>
+      <button
+        type="button"
+        onclick="Notify(this, 'succ', 'It worked!')">
+      Click me!
+      </button>
+      <p>
+        So that's what it looks like. Let's look at the code now.
+      </p>
+      <pre>
+        <code>
+          &lt;button
+            type="button"
+            onclick="Notify(this, 'succ', 'It worked!')"&gt;
+
+          Click me!
+
+          &lt;/button&gt;
+        </code>
+      </pre>
+      <p>
+        The most important line here is the one setting the onclick
+        attribute of the button, or specifically the call to Notify. Without
+        going into too much detail, this constructor simply creates a new
+        notification next to a given element. To understand this
+        better, let's have a look at the definition of the function itself.
+      </p>
+      <pre>
+        <code>
+            function Notify(element, type, text, posMode = 1, time = 2500, spacing = 15) {
+
+            ...
+        </code>
+      </pre>
+      <p>
+        The first parameter - <i>element</i> - is the element next to which you
+        want the notification to appear.
+      </p>
+      <p>
+        <i>type</i> is the type of notification.
+        This affects its colour, however in the future it'll affect more than this.
+        The valid values of this are:
+      </p>
+      <pre>
+        <code>
+          "succ"  >  Success (green)
+          "info"  >  Information (blue)
+          "warn"  >  Warning (orange)
+          "erro"  >  Error (red)
+        </code>
+      </pre>
+      <p>
+        Of course, the mentioned colours of each type are only the defaults,
+        they can be changed easily - more on that later.
+      </p>
+      <p>
+        The next parameter - <i>text</i> - is quite straightforward. As I'm sure
+        you've already guessed, it's the text which <notesjs>notes.js</notesjs>
+        puts inside the notification.
+      </p>
+      <p>
+        The last three parameters have default values for convenience, but can
+        be changed if needed.
+      </p>
+      <p>
+        <i>posMode</i> allows you to choose where the notification is relative
+        to the element. We'll look at this in more depth later, but here's some
+        of the source code where I write what each mode means.
+      </p>
+      <pre>
+        <code>
+          ...
+
+          // posModes
+          // 1: to the right of the element
+          // 2: to the left of the element
+          // 3: inside at the left of the element
+          // 4: inside at the right of the element
+
+          ...
+        </code>
+      </pre>
+      <p>
+        But don't worry if that's too vague, each mode will be looked at more later.
+      </p>
+      <p>
+        <i>time</i> is the time (in milliseconds) for which the notification waits
+        before beginning to disappear. Note that this is when it <i>begins</i> to
+        disappear - it takes a small amount of time to actually fade out.
+      </p>
+      <p>
+        And last but not least: <i>spacing</i> ! This doesn't require that much
+        explanation - basically it's how far the notification is away from the
+        edge chosen by <i>posMode</i>, of the element, in pixels. It's easier
+        to simply think of it as the margin.
+      </p>
+      <h1>
+        Getting started
+      </h1>
+      <p>
+        So, you've decided you want to try <notesjs>notes.js</notesjs> out? Luckily
+        for you, it's very very easy to install! Simply download the javascript file,
+        <a href="#">minified js</a> or <a href="#">non-minified js</a>, and the
+        <a href="#">minified css</a> or <a href="#">non-minified css</a> css file! After
+        you've got these, just reference them at the top of your html file, and
+        you're ready to go!
+        <br>
+        It's probably a good idea to download the non-minified css file if you
+        plan to modify any of the styles, otherwise it'll be a lot of unrequired
+        effort.
+        <br>
+        It's probably worth testing the library, just to make sure everything's
+        working nicely.
+      </p>
+      <pre>
+        <code>
+          Between the &lt;head&gt; tags
+
+          ...
+            &lt;link rel="stylesheet" href="path/to/notesjs.css"&gt;
+            &lt;script src="path/to/notesjs.js" charset="utf-8"&gt;&lt;/script&gt;
+          ...
+
+          And, between the &lt;body&gt; tags
+
+          ...
+            &lt;script&gt;Notify(document.body, 'succ', 'Cool, it worked!', 4, 1000)&lt;/script&gt;
+          ...
+        </code>
+      </pre>
+      <p>
+        If all's working, this should make a little green notification appear
+        at the top right of your page, saying 'Cool, it worked!'. If it didn't,
+        have another look through this section and make sure you follow every
+        instruction correctly. Oh, also notice how you're changing the time the
+        notification stays for to one second.
+      </p>
+      <h1>posModes</h1>
+      <p>
+        There are four distinct <i>posMode</i> values.
+      </p>
+      <pre>
+        <code>
+          1: The outside right of an element. It scales from the left outwards.
+
+          2: The outside left of an element. It scales from the right outwards.
+
+          3: The inside left of an element. It scales from the left inwards.
+
+          4: The inside right of an element. It scales from the right inwards.
+        </code>
+      </pre>
+      <p>
+        When I talk about how it scales, I mean to imply where it's origin is.
+        Since (using the default css,) the notification begins at a width of 0,
+        before it scales to a much wider profile, this is an important piece of
+        information - especially when developing this library.
+      </p>
+      <button type="button" onclick="Notify(this, 'succ', 'Right', 1)">posMode = 1</button>
+      <br><br>
+      <button type="button" onclick="Notify(this, 'info', 'Left', 2)">posMode = 2</button>
+      <br><br>
+      <button type="button" onclick="Notify(this, 'warn', 'In left', 3)">posMode = 3</button>
+      <br><br>
+      <button type="button" onclick="Notify(this, 'erro', 'In right', 4)">posMode = 4</button>
+      <p>
+        Now obviously, for modes 3 and 4, this wouldn't be the normal use case.
+        Usually, the last two modes would be used for things like displaying
+        notifications on the document.body element, or inside a large container
+        div. Think <i>'your post has been liked!'</i> notifications.
+      </p>
+      <p>
+        On the other hand, the first two modes are perfect for things such as
+        quick, easy to read dialog boxes, since the chances are they're coming
+        up just where your users' eyes are. Think <i>'your post has been sent!'</i>
+        notifications.
+      </p>
+      <h2>Left or right?</h2>
+      <p>
+        A good guideline generally is to use the right-extending notifications
+        for most purposes, but if the element is significantly past the horizontal
+        midpoint it seems better to use the left-extending modes. That said, the
+        last two modes are a different matter.
+        <br>
+        In most cases, users will be more inclined to look at the top right of
+        their screen than the top left, as far as I know. Perhaps think about
+        choosing the mode based on the user's operating system - for Windows
+        use mode 4 and for Mac use mode 3 to complement the position of their
+        window controls.
+      </p>
+      <h1>Types</h1>
+      <p>
+        There are 4 types of notification. Make sure you know the difference
+        between <i>posMode</i> and <i>type</i>, because there is a BIG difference.
+        <br>
+        The <i>type</i> of a notification is essentially what it's trying to tell
+        the user - A success, an error, a warning or some information.
+      </p>
+      <p>
+        To choose the type of a notification, simply change the value of the second
+        parameter in the constructor. These are your options:
+      </p>
+      <pre>
+        <code>
+          "succ"  >  Success (green)
+          "info"  >  Information (blue)
+          "warn"  >  Warning (orange)
+          "erro"  >  Error (red)
+        </code>
+      </pre>
+      <p>
+        Make sure you've got the string value exactly right, otherwise it just
+        won't work. Anyway, here's some examples of the different types.
+      </p>
+      Success: <button type="button" onclick="Notify(this, 'succ', 'Well done!')">Click me!</button>
+      <br><br>
+      Information: <button type="button" onclick="Notify(this, 'info', '10')">What's 7 + 3</button>
+      <br><br>
+      Warning: <button type="button" onclick="Notify(this, 'warn', 'Bears!')">What's in the woods?</button>
+      <br><br>
+      Error: <button type="button" onclick="Notify(this, 'erro', 'I said no to do that!')">Don't click me!</button>
+      <p>
+        You get the idea.
+      </p>
+      <h1>But they don't have to be on buttons!</h1>
+      <p>
+        Of course they don't! I was just using buttons for the purpose of this
+        documentation because it makes it a huge amount easier for me. You can put
+        them on anything at all - inline elements, inline-blocks, block-level, absolutely
+        positioned, fixed positioned, relatively positioned... You name it and you
+        can put a notification on it!
+      </p>
+      <h1>Concerned about memory?</h1>
+      <p>
+        I've thought a bit about this, and went out of my way to prevent any memory
+        leakage. Firstly, the notifications automatically delete themselves after
+        they've served their purpose.
+        <br>
+        Additionally, I've made sure that I don't delete any <i>live</i> HTML
+        elements from Javascript incorrectly, since this can cause memory leaks.
+        <br>
+        <b>But you shouldn't be worried about performance anyway!</b> The code's
+        extremely fast - there should be virtually no additional overhead, and
+        since it's only about 1.5KB in size, everyone visiting your website will
+        be like "Hey, that Javascript library loaded really quickly!"
+      </p>
+    </div>
+  </body>
+</html>
